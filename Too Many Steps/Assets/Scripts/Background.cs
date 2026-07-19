@@ -13,7 +13,11 @@ public class Background : MonoBehaviour
     }
     private void Start()
     {
-        rb.linearVelocity = Vector2.MoveTowards(transform.position, moveDirection, Mathf.Infinity)*speed*Time.deltaTime;
         Destroy(gameObject, activeTime);
+    }
+
+    private void FixedUpdate()
+    {
+        rb.linearVelocity = Vector2.MoveTowards(transform.position, moveDirection, Mathf.Infinity) * speed * Time.fixedDeltaTime;
     }
 }

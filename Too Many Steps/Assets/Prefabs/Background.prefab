@@ -105,9 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939f7dbf8373981479e8e9fa9da610ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Background
-  activeTime: 3
+  activeTime: 8
   speed: 50
-  moveDirection: {x: -1, y: -0.6}
+  moveDirection: {x: -1, y: -0.5}
 --- !u!50 &5527845239066218088
 Rigidbody2D:
   serializedVersion: 5
