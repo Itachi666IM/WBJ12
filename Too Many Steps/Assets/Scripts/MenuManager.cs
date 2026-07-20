@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private Button playButton;
+    [SerializeField] private Button continueButton;
+    [SerializeField] private Button newGameButton;
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button backButton;
@@ -13,9 +14,15 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
-        playButton.onClick.AddListener(() =>
+        continueButton.onClick.AddListener(() =>
         {
             //Play SFX
+            SceneManager.LoadScene("Game");
+        });
+
+        newGameButton.onClick.AddListener(() =>
+        {
+            DataManager.Instance.ResetAllData();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         });
 
@@ -39,5 +46,13 @@ public class MenuManager : MonoBehaviour
             optionsPanel.SetActive(false);
             //Play SFX
         });
+    }
+
+    private void Start()
+    {
+        if(DataManager.Instance.hasPlayedBefore==false)
+        {
+            continueButton.enabled = false;
+        }
     }
 }

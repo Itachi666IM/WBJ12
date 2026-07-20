@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - YC
+  - RC
+  - BC
+  - GC
   layers:
   - Default
   - TransparentFX
@@ -13,8 +17,8 @@ TagManager:
   - UI
   - Background
   - Player
-  - 
-  - 
+  - Coin
+  - Coil
   - 
   - 
   - 
@@ -46,6 +50,12 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1388822011
+    locked: 0
+  - name: Coin
+    uniqueID: 2234658499
+    locked: 0
+  - name: Coil
+    uniqueID: 2826357863
     locked: 0
   m_RenderingLayers:
   - Default
