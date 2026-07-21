@@ -69,6 +69,9 @@ public class DataManager : MonoBehaviour
             redCoins = PlayerPrefs.GetInt(RED_COINS);
             blueCoins = PlayerPrefs.GetInt(BLUE_COINS);
             greenCoins = PlayerPrefs.GetInt(GREEN_COINS);
+            coinSpawnrate = PlayerPrefs.GetFloat(COIN_SPAWNRATE);
+            coinDecayTime = PlayerPrefs.GetFloat(COIN_DECAYTIME);
+            oxygenDepletionRate = PlayerPrefs.GetFloat(OXYGEN_DEPLETIONRATE);
         }
     }
 
@@ -83,5 +86,10 @@ public class DataManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    public void CoinSpawnRate(float _updatedSpawnRate)
+    {
+        PlayerPrefs.SetFloat(COIN_SPAWNRATE,_updatedSpawnRate);
     }
 }
