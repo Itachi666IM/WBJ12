@@ -16,35 +16,36 @@ public class MenuManager : MonoBehaviour
     {
         continueButton.onClick.AddListener(() =>
         {
-            //Play SFX
+            SFX.Instance.PlayClickSound();
             SceneManager.LoadScene("Game");
         });
 
         newGameButton.onClick.AddListener(() =>
         {
+            SFX.Instance.PlayClickSound();
             DataManager.Instance.ResetAllData();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         });
 
         optionsButton.onClick.AddListener(() => 
         {
+            SFX.Instance.PlayClickSound();
             optionsPanel.SetActive(true);
             titleScreen.SetActive(false);
-            //Play SFX
         });
 
         exitButton.onClick.AddListener(() =>
         {
-            //Play SFX
+            SFX.Instance.PlayClickSound();
             Debug.Log("Quitting...");
             Application.Quit();
         });
 
         backButton.onClick.AddListener(() =>
         {
+            SFX.Instance.PlayClickSound();
             titleScreen.SetActive(true);
             optionsPanel.SetActive(false);
-            //Play SFX
         });
     }
 

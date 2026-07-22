@@ -29,16 +29,19 @@ public class GameManager : MonoBehaviour
         Instance = this;
         replayButton.onClick.AddListener(() =>
         {
+            SFX.Instance.PlayClickSound();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         });
 
         upgradesButton.onClick.AddListener(() =>
         {
+            SFX.Instance.PlayClickSound();
             SceneManager.LoadScene("Upgrades");
         });
 
         quitButton.onClick.AddListener(() =>
         {
+            SFX.Instance.PlayClickSound();
             Application.Quit();
         });
     }
