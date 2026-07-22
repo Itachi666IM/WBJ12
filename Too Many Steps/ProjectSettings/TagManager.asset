@@ -19,7 +19,7 @@ TagManager:
   - Player
   - Coin
   - Coil
-  - 
+  - PP
   - 
   - 
   - 
@@ -56,6 +56,9 @@ TagManager:
     locked: 0
   - name: Coil
     uniqueID: 2826357863
+    locked: 0
+  - name: UI
+    uniqueID: 1169840975
     locked: 0
   m_RenderingLayers:
   - Default
