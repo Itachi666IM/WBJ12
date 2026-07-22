@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class SFX : MonoBehaviour
 {
     public const string SFX_VOLUME = "SFX_Volume";
-    public static SFX Instance;
+    public static SFX Instance { get; private set; }
     [SerializeField] private AudioClip clickSound;
     [SerializeField] private AudioClip coinSound;
     [SerializeField] private AudioClip jumpSound;
@@ -14,10 +14,10 @@ public class SFX : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        ManageSingleton();
         myAudio = GetComponent<AudioSource>();
         myAudio.volume = PlayerPrefs.GetFloat(SFX_VOLUME,0.3f);
         volumeSlider.value = myAudio.volume;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SetVolume()
@@ -45,18 +45,5 @@ public class SFX : MonoBehaviour
     public void PlayJumpSound()
     {
         PlayAnySoundOnce(jumpSound);
-    }
-
-    private void ManageSingleton()
-    {
-        int instance = FindObjectsByType<SFX>(FindObjectsSortMode.None).Length;
-        if(instance > 1)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-        }
     }
 }
