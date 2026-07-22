@@ -13,7 +13,10 @@ public class Upgrade : MonoBehaviour
     [SerializeField] private int bcr;
     [SerializeField] private int gcr;
     private Button upgradeButton;
-    private float maxSpawnRate = 0.1f;
+    readonly float maxSpawnRate = 0.1f;
+    readonly float maxDecayTime = 2f;
+    readonly float maxLungCapacity = 4f;
+    readonly float maxRadius = 0.69f;
 
     private int yc;
     private int rc;
@@ -35,11 +38,17 @@ public class Upgrade : MonoBehaviour
         rc = DataManager.Instance.redCoins;
         bc = DataManager.Instance.blueCoins;
         gc = DataManager.Instance.greenCoins;
+        UpgradeManager.Instance.UpdateCoins();
     }
+
 
     private bool CanBuyUpgrade()
     {
-        if(yc>=ycr && rc>=rcr && bc>=bcr && gc>=gcr)
+        yc = DataManager.Instance.yellowCoins;
+        rc = DataManager.Instance.redCoins;
+        bc = DataManager.Instance.blueCoins;
+        gc = DataManager.Instance.greenCoins;
+        if (yc>=ycr && rc>=rcr && bc>=bcr && gc>=gcr)
         {
             return true;
         }
@@ -56,6 +65,7 @@ public class Upgrade : MonoBehaviour
     }
     public void IncreaseSpawnRate()
     {
+        SFX.Instance.PlayClickSound();
         UpdateCashInDataManagerOnClick();
         float spawnRate = DataManager.Instance.coinSpawnrate;
         spawnRate -= 0.1f;
@@ -63,9 +73,55 @@ public class Upgrade : MonoBehaviour
         {
             spawnRate = maxSpawnRate;
             upgradeButton.enabled = false;
+            UpgradeManager.Instance.Upgrade1();
         }
         DataManager.Instance.CoinSpawnRate(spawnRate);
 
+    }
+
+    public void IncreaseDecayTime()
+    {
+        SFX.Instance.PlayClickSound();
+        UpdateCashInDataManagerOnClick();
+        float decayTime = DataManager.Instance.coinDecayTime;
+        decayTime += 0.1f;
+        if(decayTime>=maxDecayTime)
+        {
+            decayTime = maxDecayTime;
+            upgradeButton.enabled=false;
+            UpgradeManager.Instance.Upgrade2();
+        }
+        DataManager.Instance.CoinDecayTime(decayTime);
+    }
+
+    public void IncreaseLungCapacity()
+    {
+        SFX.Instance.PlayClickSound();
+        UpdateCashInDataManagerOnClick();
+        float lungCapacity = DataManager.Instance.oxygenDepletionRate;
+        lungCapacity -= 0.1f;
+        if(lungCapacity<=maxLungCapacity)
+        {
+            lungCapacity = maxLungCapacity;
+            upgradeButton.enabled = false;
+            UpgradeManager.Instance.Upgrade3();
+        }
+        DataManager.Instance.OxygenDepletionRate(lungCapacity);
+    }
+
+    public void IncreaseCoilRadius()
+    {
+        SFX.Instance.PlayClickSound();
+        UpdateCashInDataManagerOnClick();
+        float coilRadius = DataManager.Instance.coilRadius;
+        coilRadius += 0.03f;
+        if(coilRadius>=maxRadius)
+        {
+            coilRadius = maxRadius;
+            upgradeButton.enabled = false;
+            UpgradeManager.Instance.Upgrade4();
+        }
+        DataManager.Instance.CoilRadius(coilRadius);
     }
 
     private void Update()

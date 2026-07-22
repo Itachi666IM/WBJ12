@@ -1,15 +1,15 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class StoryManager : MonoBehaviour
+public class WinManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private Button nextButton;
-    [SerializeField] private Button skipButton;
-    [SerializeField] private Button playButton;
+    [SerializeField] private Button playAgainButton;
+    [SerializeField] private Button exitButton;
     [SerializeField] private string[] dialogues;
     [SerializeField] private float typingSpeed;
     [SerializeField] private GameObject playerSprite;
@@ -28,22 +28,23 @@ public class StoryManager : MonoBehaviour
             NextSentence();
         });
 
-        skipButton.onClick.AddListener(() =>
+        playAgainButton.onClick.AddListener(() =>
         {
             SFX.Instance.PlayClickSound();
-            SceneManager.LoadScene("Game");
+            DataManager.Instance.ResetAllData();
+            SceneManager.LoadScene("Menu");
         });
 
-        playButton.onClick.AddListener(() =>
+        exitButton.onClick.AddListener(() =>
         {
             SFX.Instance.PlayClickSound();
-            SceneManager.LoadScene("Game");
+            Application.Quit();
         });
     }
 
     private IEnumerator DisplayStringWordByWord()
     {
-        foreach(char c in currentString)
+        foreach (char c in currentString)
         {
             dialogueText.text += c;
             yield return new WaitForSeconds(typingSpeed);
@@ -60,7 +61,7 @@ public class StoryManager : MonoBehaviour
     private void NextSentence()
     {
         dialogueText.text = "";
-        if(index < dialogues.Length-1)
+        if (index < dialogues.Length - 1)
         {
             index++;
             SFX.Instance.PlayJumpSound();
@@ -71,8 +72,8 @@ public class StoryManager : MonoBehaviour
         else
         {
             nextButton.gameObject.SetActive(false);
-            skipButton.gameObject.SetActive(false);
-            playButton.gameObject.SetActive(true);
+            playAgainButton.gameObject.SetActive(true);
+            exitButton.gameObject.SetActive(true);
         }
     }
 }

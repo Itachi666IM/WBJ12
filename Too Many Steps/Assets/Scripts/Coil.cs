@@ -5,7 +5,13 @@ public class Coil : MonoBehaviour
 {
     private Vector3 mousePosition;
     private float zPos = 0f;
+    private int coinMultiplier;
 
+    private void Start()
+    {
+        transform.localScale = new Vector3( DataManager.Instance.coilRadius,DataManager.Instance.coilRadius, DataManager.Instance.coilRadius);
+        coinMultiplier = DataManager.Instance.coinMultiplier * 1;
+    }
     private void Update()
     {
         mousePosition = Mouse.current.position.ReadValue();
@@ -18,25 +24,29 @@ public class Coil : MonoBehaviour
     {
         if(collision.tag =="YC")
         {
-            DataManager.Instance.yellowCoins++;
+            SFX.Instance.PlayCoinSound();
+            DataManager.Instance.yellowCoins+=coinMultiplier;
             Destroy(collision.gameObject);
             GameManager.Instance.UpdateUI();
         }
         else if(collision.tag =="RC")
         {
-            DataManager.Instance.redCoins++;
+            SFX.Instance.PlayCoinSound();
+            DataManager.Instance.redCoins+=coinMultiplier;
             Destroy(collision.gameObject);
             GameManager.Instance.UpdateUI();
         }
         else if(collision.tag == "BC")
         {
-            DataManager.Instance.blueCoins++;
+            SFX.Instance.PlayCoinSound();
+            DataManager.Instance.blueCoins+=coinMultiplier;
             Destroy(collision.gameObject);
             GameManager.Instance.UpdateUI();
         }
         else if(collision.tag =="GC")
         {
-            DataManager.Instance.greenCoins++;
+            SFX.Instance.PlayCoinSound();
+            DataManager.Instance.greenCoins+=coinMultiplier;
             Destroy (collision.gameObject);
             GameManager.Instance.UpdateUI();
         }

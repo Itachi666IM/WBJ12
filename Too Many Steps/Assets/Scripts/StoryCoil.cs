@@ -18,18 +18,22 @@ public class StoryCoil : MonoBehaviour
     {
         if (collision.tag == "YC")
         {
+            SFX.Instance.PlayCoinSound();
             Destroy(collision.gameObject);
         }
         else if (collision.tag == "RC")
         {
+            SFX.Instance.PlayCoinSound();
             Destroy(collision.gameObject);
         }
         else if (collision.tag == "BC")
         {
+            SFX.Instance.PlayCoinSound();
             Destroy(collision.gameObject);
         }
         else if (collision.tag == "GC")
         {
+            SFX.Instance.PlayCoinSound();
             Destroy(collision.gameObject);
         }
     }
